@@ -1,31 +1,30 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const port = process.env.PORT || 6000;
-const path = require("./Student/router");
-MONGODB_URI =
-  "mongodb+srv://t62xbdtv8YyUmtj3:t62xbdtv8YyUmtj3@cluster0.zqyac.mongodb.net/MealDB?retryWrites=true&w=majority";
+const path = require("./Student/Router");
+const port = process.env.PORT || 6001;
 const app = express();
 
-mongoose.connect(MONGODB_URI, {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
 mongoose.connection
   .on("open", () => {
-    console.log("database connected successfully");
+    console.log("Database is connected successfully");
   })
+
   .once("error", () => {
-    console.log("failed while connecting to the database");
+    console.log("Failed to connect to the database");
   });
 
-app.use(express.json());
-
 app.get("/", async (req, res) => {
-  res.status(200).send("creating a student api");
+  res.status(200).send("This is a musical API");
 });
 
-app.use("/student/api", path);
+app.use(express.json());
+app.use("/Musicals/api", path);
 
 app.listen(port, () => {
   console.log(`server is listening on port: ${port}`);

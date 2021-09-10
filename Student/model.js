@@ -1,17 +1,13 @@
 const mongoose = require("mongoose");
-const students = mongoose.Schema(
+const Musics = mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
     },
-    course: {
+    title: {
       type: String,
       required: true,
-    },
-    present: {
-      type: String,
-      default: false,
     },
   },
   {
@@ -19,4 +15,4 @@ const students = mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("student", students);
+module.exports = mongoose.model("music", Musics);
